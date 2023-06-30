@@ -56,6 +56,7 @@ namespace MouseTrigger
         private void MonitorScreen_Load(object sender, EventArgs e)
         {
             new KeyClient().Init(label1);
+            Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
