@@ -24,7 +24,7 @@ namespace MouseTrigger
 
         int keyHookId;
         uint orig = 0;
-        Label _lbl = null;
+        static Label _lbl = null;
 
         public void Init(Label lbl)
         {
@@ -45,7 +45,7 @@ namespace MouseTrigger
 
         private void Setup()
         {
-            keyHookId = HotKeyService.RegisterHotKey(Keys.F11, KeyModifiers.Control|KeyModifiers.NoRepeat);
+            keyHookId = HotKeyService.RegisterHotKey(Keys.F12, KeyModifiers.Control|KeyModifiers.NoRepeat);
             HotKeyService.HotKeyPressed += new EventHandler<KeyEventArgs>(HotKeyService_HotKeyPressed);
         }
 
@@ -79,8 +79,11 @@ namespace MouseTrigger
 
         private static bool CheckUp()
         {
-            int val = GetKeyState((int)Keys.F11) & 0x8000;
+            int val = GetKeyState((int)Keys.F12) & 0x8000;
             System.Threading.Thread.Sleep(200);
+            _lbl.Invoke((MethodInvoker)delegate {
+                _lbl.Text = "Hot Key Down: " + GetKeyState((int)Keys.F12).ToString();
+            });
             return (val!=0);
         }
      
