@@ -1,6 +1,7 @@
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MouseTrigger.Properties;
 
 namespace MouseTrigger
 {
@@ -55,18 +56,9 @@ namespace MouseTrigger
         }
         private void MonitorScreen_Load(object sender, EventArgs e)
         {
-            new KeyClient().Init(label1);
+            comboBox1.Text = (string)Settings.Default["Slowdown"];
+            new KeyClient().Init(label1, comboBox1);
             Hide();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            uint x = 0;
-            if (SystemParametersInfo(SPI_GETMOUSESPEED, 0, ref x, 0))
-            {
-                uint t = x + 5;
-                SystemParametersInfo(SPI_SETMOUSESPEED, 0, t, 0);
-            }
         }
     }
 }
